@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мини-игра</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        #game-area {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+        #target {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        #score {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Мини-игра: Попади по мишени</h1>
+    <div id="game-area">
+        <div id="target"></div>
+    </div>
+    <div id="score">Счет: 0</div>
+
+    <script>
+        let score = 0;
+        const target = document.getElementById("target");
+        const gameArea = document.getElementById("game-area");
+        const scoreDisplay = document.getElementById("score");
+
+        function moveTarget() {
+            const maxX = gameArea.offsetWidth - target.offsetWidth;
+            const maxY = gameArea.offsetHeight - target.offsetHeight;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            target.style.left = randomX + 'px';
+            target.style.top = randomY + 'px';
+        }
+
+        target.addEventListener("click", function() {
+            score++;
+            scoreDisplay.textContent = "Счет: " + score;
+            moveTarget();
+        });
+
+        // Перемещаем мишень сразу после загрузки страницы
+        moveTarget();
+    </script>
+</body>
+</html>
